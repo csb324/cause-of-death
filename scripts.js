@@ -1,5 +1,7 @@
 console.log("test");
 
+var deathCount = 0;
+
 var deaths = [
  {
    "TOTAL": "Terrorist attack by muslim extremist immigrants",
@@ -368,6 +370,8 @@ var button = document.getElementById('die');
 
 function die() {
    var index = Math.random();
+   deathCount += 1;
+
    var death;
 
    for (var i = 0; i < deaths.length; i++) {
@@ -377,9 +381,13 @@ function die() {
       }
    }
 
-   document.getElementById('cause__label').innerText = death.TOTAL;
-   document.getElementById('odds__factor').innerText = death.chances;
-   document.getElementsByTagName('body')[0].setAttribute('style', "background-color: " + death.background + ";");
+  document.getElementById('death__count').innerText = deathCount;
+  if (deathCount > 1) {
+    document.getElementById('death__times').innerText = "times";
+  }
+  document.getElementById('cause__label').innerText = death.TOTAL;
+  document.getElementById('odds__factor').innerText = death.chances;
+  document.getElementsByTagName('body')[0].setAttribute('style', "background-color: " + death.background + ";");
 }
 
 
