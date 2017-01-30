@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Teko|VT323');
+
+
+body {
+	font-family: 'Teko', monospace;
+	background-color: #000;
+	color: #fff;
+	text-align: center;
+	margin-top: 10vh;
+	letter-spacing: 0.04em;
+}
+
+.cause {
+	padding-top: 1em;
+
+}
+	.cause__intro {
+		font-size: 3em;
+		font-weight: normal;
+	}
+	.cause__label {
+		font-weight: normal;
+
+		text-transform: uppercase;
+		font-size: 8em;
+		margin: 1rem 0;
+	}
+
+
+.odds {
+	font-size: 2em;
+	margin: 0 auto 1em;
+	max-width: 24em;
+}
+
+.button {
+	color: #fff;
+	font-size: 1.2em;
+}
+
+.credit {
+	font-size: 1.2em;
+	margin-top: 5em;
+}
