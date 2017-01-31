@@ -1,6 +1,4 @@
-console.log("test");
-
-var deathCount = 0;
+var deathCount = parseInt(localStorage.getItem("cause_of_death_count")) || 0;
 
 var deaths = [
  {
@@ -193,7 +191,7 @@ var deaths = [
    "percent": 0.01479239024,
    "threshold": 0.51792365,
    "chances": 67.6,
-   "background": "#25ff00"
+   "background": "#23f100"
  },
  {
    "TOTAL": "intentional self harm",
@@ -364,13 +362,13 @@ var deaths = [
    "background": "#585858"
  }
 ];
-
 var button = document.getElementById('die');
-
 
 function die() {
    var index = Math.random();
+
    deathCount += 1;
+   localStorage.setItem("cause_of_death_count", deathCount)
 
    var death;
 
