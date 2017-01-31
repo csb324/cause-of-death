@@ -363,6 +363,7 @@ var deaths = [
  }
 ];
 var button = document.getElementById('die');
+var tweet = document.getElementById('share');
 
 function die() {
    var index = Math.random();
@@ -379,13 +380,21 @@ function die() {
       }
    }
 
-  document.getElementById('death__count').innerText = deathCount;
-  if (deathCount > 1) {
-    document.getElementById('death__times').innerText = "times";
-  }
-  document.getElementById('cause__label').innerText = death.TOTAL;
-  document.getElementById('odds__factor').innerText = death.chances;
-  document.getElementsByTagName('body')[0].setAttribute('style', "background-color: " + death.background + ";");
+   var tweetString = "https://twitter.com/intent/tweet?text=I've%20died%20"
+      + deathCount 
+      + "%20times!&url=http%3A//yourcauseofdeath.com";
+
+   tweet.setAttribute('href', tweetString);
+
+   document.getElementById('death__count').innerText = deathCount;
+   
+   if (deathCount > 1) {
+      document.getElementById('death__times').innerText = "times";
+   }
+   
+   document.getElementById('cause__label').innerText = death.TOTAL;
+   document.getElementById('odds__factor').innerText = death.chances;
+   document.getElementsByTagName('body')[0].setAttribute('style', "background-color: " + death.background + ";");
 }
 
 
