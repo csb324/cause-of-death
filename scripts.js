@@ -1343,55 +1343,61 @@ var deaths = [
 var button = document.getElementById('die');
 var tweet = document.getElementById('share');
 
-function die() {
-   var index = Math.random();
-
+function updateCounts() {
    deathCount += 1;
    localStorage.setItem("cause_of_death_count", deathCount)
-
-   var death;
-
-   for (var i = 0; i < deaths.length; i++) {
-      if (index < deaths[i].threshold) {
-         death = deaths[i];
-         break;
-      }
-   }
-
-   if (death.isTerror) {
-      terrorismCount += 1;
-      localStorage.setItem("cause_of_death_terrorism_count", terrorCount);
-   }
-
-   var tweetString = "https://twitter.com/intent/tweet?text=I've%20died%20"
-      + deathCount 
-      + "%20times!&url=http%3A//yourcauseofdeath.com";
-
-   tweet.setAttribute('href', tweetString);
-
-
    document.getElementById('death__count').innerText = deathCount;
    if (deathCount > 1) {
       document.getElementById('death__times').innerText = "times";
    }
+}
 
-
+function updateTerror() {
+   terrorismCount += 1;
+   localStorage.setItem("cause_of_death_terrorism_count", terrorCount);   
    document.getElementById('terror__count').innerText = terrorismCount;
    if (terrorismCount == 1) {
       document.getElementById('terror__times').innerText = "time";
    } else {
       document.getElementById('terror__times').innerText = "times";
    }
+}
+function getDeath() {
+   var index = Math.random();
+   var death;
+   for (var i = 0; i < deaths.length; i++) {
+      if (index < deaths[i].threshold) {
+         death = deaths[i];
+         break;
+      }
+   }
+   return death;
+}
+function share() {
+   var tweetString = "https://twitter.com/intent/tweet?text=I've%20died%20"
+      + deathCount 
+      + "%20times!&url=http%3A//yourcauseofdeath.com";
 
-
-   
+   tweet.setAttribute('href', tweetString);
+}
+function showDeath(death) {
    document.getElementById('cause__label').innerText = death.Cause;
    document.getElementById('odds__factor').innerText = death.Odds;
    document.getElementsByTagName('body')[0].setAttribute('style', "background-color: " + death.Color + ";");
 }
 
+function die() {
+   var death = getDeath();
+   showDeath(death);
+
+   ga('send', 'event', 'Death', 'click', death.Cause);
+   if (death.isTerror) {
+      updateTerror();
+   }
+   updateCounts();
+   share();
+}
 
 button.onclick = die;
-
 die();
 
